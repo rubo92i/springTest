@@ -1,0 +1,39 @@
+package am.basic.springTest.service.impl;
+
+
+import am.basic.springTest.model.Comment;
+import am.basic.springTest.repository.CommentRepository;
+import am.basic.springTest.service.CommentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+
+@Service
+public class CommentServiceImpl implements CommentService {
+
+
+    @Autowired
+    private CommentRepository commentRepository;
+
+
+    @Override
+    public List<Comment> getByUserId(int userId) {
+        return commentRepository.getByUserId(userId);
+    }
+
+
+    @Override
+    public void add(Comment comment) {
+        commentRepository.save(comment);
+    }
+
+
+    @Override
+    public void delete(int id) {
+
+        commentRepository.deleteById(id);
+
+    }
+}
