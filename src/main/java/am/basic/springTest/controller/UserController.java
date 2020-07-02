@@ -25,7 +25,10 @@ public class UserController {
 
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public ModelAndView login(@RequestParam(name = "username") String username, @RequestParam String password, HttpSession session) {
+    public ModelAndView login(@RequestParam String username,
+                              @RequestParam String password,
+                              @RequestParam(required = false) String remember,
+                              HttpSession session) {
 
         try {
             User user = userService.login(username, password);

@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import static am.basic.springTest.util.constants.ParameterKeys.MESSAGE_ATTRIBUTE_KEY;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class TestController {
@@ -15,7 +17,7 @@ public class TestController {
     public String test() {
         new ModelAndView();
         new ModelAndView("index");
-        new ModelAndView("index","key","dfhn");
+        new ModelAndView("index", "key", "dfhn");
         return "index";
     }
 
@@ -25,6 +27,15 @@ public class TestController {
         return new ModelAndView("index");
     }
 
+    @RequestMapping(method = RequestMethod.POST, path = "/test2")
+    public ModelAndView test2(
+            @RequestParam(name = "name", required = false, defaultValue = "John") String name,
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpSession session) {
 
+
+        return new ModelAndView("index");
+    }
 
 }

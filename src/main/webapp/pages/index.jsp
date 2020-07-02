@@ -22,7 +22,7 @@
 <form method="post" action="/login">
     username : <input type="text" name="username"><br/>
     password : <input type="text" name="password"><br>
-    remember : <input type="checkbox" name="remember_me"><br>
+    remember : <input type="checkbox" name="remember"><br>
     <input type="submit" name="submit"><br>
 </form>
 <a href="go-forget-password">forget password</a>
