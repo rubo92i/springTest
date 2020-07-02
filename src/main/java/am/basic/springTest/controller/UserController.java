@@ -50,26 +50,11 @@ public class UserController {
 
 
     @RequestMapping(path = "/register", method = RequestMethod.POST)
-    public ModelAndView register(@RequestParam(name = "username") String username,
+    public ModelAndView register(@RequestParam String username,
                                  @RequestParam String password,
                                  @RequestParam String name,
                                  @RequestParam String surname) {
 
-    /*    try {
-            userService.register();
-            session.setAttribute(USER_ATTRIBUTE_KEY, user);
-            return new ModelAndView(HOME_PAGE);
-        } catch (UnverifiedException e) {
-            ModelAndView modelAndView = new ModelAndView(VERIFICATION_PAGE);
-            modelAndView.addObject(MESSAGE_ATTRIBUTE_KEY, e.getMessage());
-            modelAndView.addObject(USERNAME_PARAM_KEY, username);
-            return modelAndView;
-        } catch (NotFoundException e) {
-            return new ModelAndView(INDEX_PAGE, MESSAGE_ATTRIBUTE_KEY, e.getMessage());
-        } catch (RuntimeException ex) {
-            ex.printStackTrace();
-            return new ModelAndView(INDEX_PAGE, MESSAGE_ATTRIBUTE_KEY, INTERNAL_ERROR_MESSAGE);
-        }*/
 
         return null;
     }
