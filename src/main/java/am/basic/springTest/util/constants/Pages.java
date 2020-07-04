@@ -15,5 +15,5 @@ public interface Pages {
 
     String RECOVER_PASSWORD_PAGE = "recover-password";
 
-    String START_URL = "start";
+    String START_URL = "/";
 }

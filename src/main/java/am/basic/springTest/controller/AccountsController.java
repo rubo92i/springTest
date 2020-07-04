@@ -6,6 +6,7 @@ import am.basic.springTest.model.exceptions.DuplicateDataException;
 import am.basic.springTest.model.exceptions.NotFoundException;
 import am.basic.springTest.model.exceptions.UnverifiedException;
 import am.basic.springTest.service.UserService;
+import am.basic.springTest.util.CookieUtil;
 import am.basic.springTest.util.encoder.Encryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -31,7 +33,7 @@ public class AccountsController {
 
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
-    public ModelAndView start(@CookieValue(name = REMEMBER_TOKEN_COOKIE_KEY, required = false) String rememberToken,
+    public ModelAndView start(@CookieValue(name = "remember_token", required = false) String rememberToken,
                               HttpSession session, HttpServletResponse response) throws Exception {
 
         if (rememberToken == null) {
@@ -171,9 +173,10 @@ public class AccountsController {
 
 
     @RequestMapping(path = "/logout", method = RequestMethod.GET)
-    public String logout(HttpSession session) {
+    public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
         session.invalidate();
-        return "index";
+        CookieUtil.removeCookie(request, response, REMEMBER_TOKEN_COOKIE_KEY);
+        return INDEX_PAGE;
     }
 
 }

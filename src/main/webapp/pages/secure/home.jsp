@@ -30,9 +30,9 @@
 <% } %>
 <br><br>
 
-<form method="post" action="/change-password">
+<form method="post" action="/secure/change-password">
     old password : <input type="text" name="password"><br>
-    new password : <input type="text" name="new_password"><br>
+    new password : <input type="text" name="newPassword"><br>
 
     <input type="submit" name="submit"><br>
 </form>

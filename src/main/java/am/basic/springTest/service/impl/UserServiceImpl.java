@@ -8,6 +8,7 @@ import am.basic.springTest.model.exceptions.NotFoundException;
 import am.basic.springTest.model.exceptions.UnverifiedException;
 import am.basic.springTest.repository.UserRepository;
 import am.basic.springTest.service.UserService;
+import am.basic.springTest.util.MailSenderClient;
 import am.basic.springTest.util.encoder.Generator;
 import am.basic.springTest.util.encoder.Md5Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private MailSenderClient mailSenderClient;
 
     @Override
     public void register(User user) throws DuplicateDataException {
@@ -31,6 +34,7 @@ public class UserServiceImpl implements UserService {
         user.setCode(Generator.getRandomDigits(5));
         user.setStatus(0);
         userRepository.save(user);
+        mailSenderClient.sendSimpleMessage(user.getUsername(), "Verification", "Your code is " + user.getCode());
     }
 
 
@@ -47,8 +51,8 @@ public class UserServiceImpl implements UserService {
     public User changePassword(String username, String password, String newPassword) throws NotFoundException, AccessDeniedException {
         User user = userRepository.getByUsername(username);
         NotFoundException.check(user == null, USER_NOT_EXIST_MESSAGE);
-        AccessDeniedException.check(!user.getPassword().equals(password), WRONG_PASSWORD_MESSAGE);
-        user.setPassword(Md5Encoder.encode(password));
+        AccessDeniedException.check(!user.getPassword().equals(Md5Encoder.encode(password)), WRONG_PASSWORD_MESSAGE);
+        user.setPassword(Md5Encoder.encode(newPassword));
         userRepository.save(user);
         return user;
     }
@@ -58,7 +62,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.getByUsername(username);
         NotFoundException.check(user == null, USER_NOT_EXIST_MESSAGE);
         user.setCode(Generator.getRandomDigits(5));
-        //send code to user by email
+        mailSenderClient.sendSimpleMessage(user.getUsername(), "ACCESS CODE", "Your code is " + user.getCode());
         userRepository.save(user);
     }
 
