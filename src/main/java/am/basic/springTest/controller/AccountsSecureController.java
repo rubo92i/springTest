@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import static am.basic.springTest.util.constants.Messages.INTERNAL_ERROR_MESSAGE;
 import static am.basic.springTest.util.constants.Messages.PASSWORD_CHANGE_SUCCESS_MESSAGE;
 import static am.basic.springTest.util.constants.Pages.HOME_PAGE;
 import static am.basic.springTest.util.constants.ParameterKeys.MESSAGE_ATTRIBUTE_KEY;
@@ -34,6 +35,9 @@ public class AccountsSecureController {
             return new ModelAndView(HOME_PAGE, MESSAGE_ATTRIBUTE_KEY, PASSWORD_CHANGE_SUCCESS_MESSAGE);
         } catch (NotFoundException | AccessDeniedException e) {
             return new ModelAndView(HOME_PAGE, MESSAGE_ATTRIBUTE_KEY, e.getMessage());
+        }catch (RuntimeException ex){
+            return new ModelAndView(HOME_PAGE, MESSAGE_ATTRIBUTE_KEY, INTERNAL_ERROR_MESSAGE);
+
         }
 
     }

@@ -51,7 +51,7 @@ public class AccountsController {
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public ModelAndView login(@RequestParam String username,
                               @RequestParam String password,
-                              @RequestParam(required = false) String remember,
+                              @RequestParam(required = false, defaultValue = "OFF") String remember,
                               HttpSession session,
                               HttpServletResponse response) throws Exception {
 
@@ -107,6 +107,9 @@ public class AccountsController {
 
         } catch (DuplicateDataException ex) {
             return new ModelAndView(REGISTER_PAGE, MESSAGE_ATTRIBUTE_KEY, ex.getMessage());
+        } catch (RuntimeException ex) {
+            ex.printStackTrace();
+            return new ModelAndView(REGISTER_PAGE, MESSAGE_ATTRIBUTE_KEY, INTERNAL_ERROR_MESSAGE);
         }
     }
 
@@ -118,6 +121,9 @@ public class AccountsController {
             return new ModelAndView(RECOVER_PASSWORD_PAGE, USERNAME_PARAM_KEY, username);
         } catch (NotFoundException e) {
             return new ModelAndView(FORGET_PASSWORD_PAGE, MESSAGE_ATTRIBUTE_KEY, e.getMessage());
+        } catch (RuntimeException ex) {
+            ex.printStackTrace();
+            return new ModelAndView(FORGET_PASSWORD_PAGE, MESSAGE_ATTRIBUTE_KEY, INTERNAL_ERROR_MESSAGE);
         }
     }
 
@@ -135,7 +141,13 @@ public class AccountsController {
             modelAndView.addObject(USERNAME_PARAM_KEY, username);
             modelAndView.addObject(MESSAGE_ATTRIBUTE_KEY, e.getMessage());
             return modelAndView;
-        }
+        } catch (RuntimeException ex) {
+            ex.printStackTrace();
+            ModelAndView modelAndView = new ModelAndView(RECOVER_PASSWORD_PAGE);
+            modelAndView.addObject(USERNAME_PARAM_KEY, username);
+            modelAndView.addObject(MESSAGE_ATTRIBUTE_KEY, INTERNAL_ERROR_MESSAGE);
+            return modelAndView;
+         }
     }
 
 
@@ -155,6 +167,12 @@ public class AccountsController {
             modelAndView.addObject(USERNAME_PARAM_KEY, username);
             modelAndView.addObject(MESSAGE_ATTRIBUTE_KEY, e.getMessage());
             return modelAndView;
+        } catch (RuntimeException ex) {
+            ex.printStackTrace();
+            ModelAndView modelAndView = new ModelAndView(VERIFICATION_PAGE);
+            modelAndView.addObject(USERNAME_PARAM_KEY, username);
+            modelAndView.addObject(MESSAGE_ATTRIBUTE_KEY, INTERNAL_ERROR_MESSAGE);
+            return modelAndView;
         }
     }
 
@@ -167,6 +185,12 @@ public class AccountsController {
             ModelAndView modelAndView = new ModelAndView(VERIFICATION_PAGE);
             modelAndView.addObject(USERNAME_PARAM_KEY, username);
             modelAndView.addObject(MESSAGE_ATTRIBUTE_KEY, e.getMessage());
+            return modelAndView;
+        } catch (RuntimeException ex) {
+            ex.printStackTrace();
+            ModelAndView modelAndView = new ModelAndView(VERIFICATION_PAGE);
+            modelAndView.addObject(USERNAME_PARAM_KEY, username);
+            modelAndView.addObject(MESSAGE_ATTRIBUTE_KEY, INTERNAL_ERROR_MESSAGE);
             return modelAndView;
         }
     }
