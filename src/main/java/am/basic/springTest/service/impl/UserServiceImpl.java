@@ -13,6 +13,7 @@ import am.basic.springTest.util.encoder.Generator;
 import am.basic.springTest.util.encoder.Md5Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import static am.basic.springTest.util.constants.Messages.*;
 
@@ -27,6 +28,7 @@ public class UserServiceImpl implements UserService {
     private MailSenderClient mailSenderClient;
 
     @Override
+    @Transactional
     public void register(User user) throws DuplicateDataException {
         User duplicate = userRepository.getByUsername(user.getUsername());
         DuplicateDataException.check(duplicate != null, DUPLICATE_USER_MESSAGE);
