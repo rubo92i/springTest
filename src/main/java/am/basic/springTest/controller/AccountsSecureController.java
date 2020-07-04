@@ -37,7 +37,6 @@ public class AccountsSecureController {
             return new ModelAndView(HOME_PAGE, MESSAGE_ATTRIBUTE_KEY, e.getMessage());
         }catch (RuntimeException ex){
             return new ModelAndView(HOME_PAGE, MESSAGE_ATTRIBUTE_KEY, INTERNAL_ERROR_MESSAGE);
-
         }
 
     }
