@@ -24,7 +24,6 @@ public class User {
     private String code;
 
     @NotBlank
-    @Size(min = 5)
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 

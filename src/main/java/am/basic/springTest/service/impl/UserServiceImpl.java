@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.getByUsername(username);
         NotFoundException.check(user == null, USER_NOT_EXIST_MESSAGE);
         AccessDeniedException.check(!user.getPassword().equals(password), WRONG_PASSWORD_MESSAGE);
-        user.setPassword(newPassword);
+        user.setPassword(Md5Encoder.encode(password));
         userRepository.save(user);
         return user;
     }
@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.getByUsername(username);
         NotFoundException.check(user == null, USER_NOT_EXIST_MESSAGE);
         AccessDeniedException.check(!user.getCode().equals(code), WRONG_CODE_MESSAGE);
-        user.setPassword(password);
+        user.setPassword(Md5Encoder.encode(password));
         userRepository.save(user);
     }
 

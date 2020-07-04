@@ -10,10 +10,6 @@ import static am.basic.springTest.util.constants.Pages.*;
 public class RoutingController {
 
 
-    @RequestMapping(method = RequestMethod.GET, path = "/")
-    public String getStartPage() {
-        return INDEX_PAGE;
-    }
 
 
     @RequestMapping(method = RequestMethod.GET, path = "/go-register")
