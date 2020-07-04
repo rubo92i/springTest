@@ -60,12 +60,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void sendCode(String username) throws NotFoundException {
         User user = userRepository.getByUsername(username);
         NotFoundException.check(user == null, USER_NOT_EXIST_MESSAGE);
         user.setCode(Generator.getRandomDigits(5));
-        mailSenderClient.sendSimpleMessage(user.getUsername(), "ACCESS CODE", "Your code is " + user.getCode());
         userRepository.save(user);
+        mailSenderClient.sendSimpleMessage(user.getUsername(), "ACCESS CODE", "Your code is " + user.getCode());
     }
 
     @Override
