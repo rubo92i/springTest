@@ -17,7 +17,7 @@
 <% } %>
 <br><br>
 
-<form method="post" action="/verify">
+<form method="post" action="<%=request.getServletContext().getContextPath()%>/verify">
     <input type="hidden" name="username" value="<%=request.getAttribute(USERNAME_PARAM_KEY)%>">
     code: <input type="text" name="code"><br>
     <input type="submit" name="submit"><br>
@@ -25,7 +25,7 @@
 
 
 <br><br>
-<form method="post" action="/resend">
+<form method="post" action="<%=request.getServletContext().getContextPath()%>/resend">
     <input type="hidden" name="username" value="<%=request.getAttribute(USERNAME_PARAM_KEY)%>">
     <input type="submit" name="submit" value="Resend code"><br>
 </form>

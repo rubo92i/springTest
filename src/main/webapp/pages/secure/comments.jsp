@@ -1,6 +1,8 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="am.basic.springTest.model.Comment" %>
 <%@ page import="java.util.List" %>
 <%@ page import="static am.basic.springTest.util.constants.ParameterKeys.USER_ATTRIBUTE_KEY" %>
+<%@ page import="static am.basic.springTest.util.constants.ParameterKeys.MESSAGE_ATTRIBUTE_KEY" %>
 <%--
   Created by IntelliJ IDEA.
   User: ruben.manukyan
@@ -15,12 +17,19 @@
 </head>
 <body>
 
-<a href="/logout" style="float: right">Logout</a>
-<a href="/secure/home">Home</a>
+<a href="<%=request.getServletContext().getContextPath()%>/logout" style="float: right">Logout</a>
+<a href="<%=request.getServletContext().getContextPath()%>/secure/home">Home</a>
+
+<br><br>
+<% if (request.getAttribute(MESSAGE_ATTRIBUTE_KEY) != null) { %>
+<%=request.getAttribute(MESSAGE_ATTRIBUTE_KEY)%>
+<% } %>
+<br><br>
+
 
 
 <br>
-<form method="post" action="/secure/comments/add">
+<form method="post" action="<%=request.getServletContext().getContextPath()%>/secure/comments/add">
     Comment : <input type="text" name="name">
     Description : <input type="text" name="description">
     <input type="submit" value="add">
@@ -42,7 +51,7 @@
     <tr>
 
         <td>
-            <form method="post" action="/secure/comments/edit">
+            <form method="post" action="<%=request.getServletContext().getContextPath()%>/secure/comments/edit">
                 <input type="hidden" name="id" value="<%=comment.getId()%>">
                 <input type="text" name="name" value="<%=comment.getName()%>">
                 <input type="text" name="description" value="<%=comment.getDescription()%>">

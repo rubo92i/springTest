@@ -19,14 +19,14 @@
 <% } %>
 <br><br>
 
-<form method="post" action="/login">
+<form method="post" action="<%=request.getServletContext().getContextPath()%>/login">
     username : <input type="text" name="username"><br/>
     password : <input type="text" name="password"><br>
     remember : <input type="checkbox" name="remember"><br>
     <input type="submit" name="submit"><br>
 </form>
-<a href="go-forget-password">forget password</a>
-<a href="go-register">register</a>
+<a href="<%=request.getServletContext().getContextPath()%>go-forget-password">forget password</a>
+<a href="<%=request.getServletContext().getContextPath()%>go-register">register</a>
 
 
 <br>

@@ -17,7 +17,7 @@
 <% } %>
 <br><br>
 
-<form method="post" action="/register">
+<form method="post" action="<%=request.getServletContext().getContextPath()%>/register">
     name     : <input type="text" name="name"><br/>
     surname  : <input type="text" name="surname"><br>
     username : <input type="text" name="username"><br/>

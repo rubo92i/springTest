@@ -18,7 +18,7 @@
 <br><br>
 
 
-<form method="post" action="/recover-password">
+<form method="post" action="<%=request.getServletContext().getContextPath()%>/recover-password">
     <input type="hidden" name="username" value="<%=request.getAttribute(USERNAME_PARAM_KEY)%>">
     code: <input type="text" name="code"><br>
     new password : <input type="text" name="password"><br>

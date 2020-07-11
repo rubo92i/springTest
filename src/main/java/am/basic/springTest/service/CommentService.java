@@ -11,4 +11,7 @@ public interface CommentService {
     void add(Comment comment) ;
 
     void delete(int id) ;
+
+    List<Comment> search(Comment sample);
+
 }

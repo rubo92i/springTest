@@ -17,7 +17,7 @@
 <% } %>
 <br><br>
 
-<form method="post" action="/forget-password">
+<form method="post" action="<%=request.getServletContext().getContextPath()%>/forget-password">
     username : <input type="text" name="username"><br/>
     <input type="submit" name="submit"><br>
 </form>

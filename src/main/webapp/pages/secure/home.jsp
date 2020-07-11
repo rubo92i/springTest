@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<a href="/logout" style="float: right">Logout</a>
+<a href="<%=request.getServletContext().getContextPath()%>/logout" style="float: right">Logout</a>
 <h1 style="background: cornflowerblue">This is home page</h1>
 
 <%
@@ -30,14 +30,14 @@
 <% } %>
 <br><br>
 
-<form method="post" action="/secure/change-password">
+<form method="post" action="<%=request.getServletContext().getContextPath()%>/secure/change-password">
     old password : <input type="text" name="password"><br>
     new password : <input type="text" name="newPassword"><br>
 
     <input type="submit" name="submit"><br>
 </form>
 
-<a href="/secure/comments">comments</a>
+<a href="<%=request.getServletContext().getContextPath()%>/secure/comments">comments</a>
 <br><br>
 
 

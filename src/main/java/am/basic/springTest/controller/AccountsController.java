@@ -7,6 +7,7 @@ import am.basic.springTest.model.exceptions.NotFoundException;
 import am.basic.springTest.model.exceptions.UnverifiedException;
 import am.basic.springTest.service.UserService;
 import am.basic.springTest.util.CookieUtil;
+import am.basic.springTest.util.ValidationMessageConverter;
 import am.basic.springTest.util.encoder.Encryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.ConstraintViolationException;
 
 import static am.basic.springTest.util.constants.Messages.*;
 import static am.basic.springTest.util.constants.Pages.*;
@@ -107,6 +109,8 @@ public class AccountsController {
 
         } catch (DuplicateDataException ex) {
             return new ModelAndView(REGISTER_PAGE, MESSAGE_ATTRIBUTE_KEY, ex.getMessage());
+        } catch (ConstraintViolationException exception) {
+            return new ModelAndView(REGISTER_PAGE, MESSAGE_ATTRIBUTE_KEY, ValidationMessageConverter.getMessage(exception));
         } catch (RuntimeException ex) {
             ex.printStackTrace();
             return new ModelAndView(REGISTER_PAGE, MESSAGE_ATTRIBUTE_KEY, INTERNAL_ERROR_MESSAGE);
@@ -147,7 +151,7 @@ public class AccountsController {
             modelAndView.addObject(USERNAME_PARAM_KEY, username);
             modelAndView.addObject(MESSAGE_ATTRIBUTE_KEY, INTERNAL_ERROR_MESSAGE);
             return modelAndView;
-         }
+        }
     }
 
 

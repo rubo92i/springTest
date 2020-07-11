@@ -23,20 +23,17 @@ public class User {
 
     private String code;
 
-    @NotBlank
+    @NotBlank(message = "Username must not be blank")
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 
 
-    @NotBlank
-    @Size(min = 6)
+    @NotBlank(message = "Password must not be blank")
+    @Size(min = 6, message = "Password must be more then 6 characters")
     private String password;
 
     @Column(name = "status", nullable = false)
     private int status;
-
-
-
 
 
 }
