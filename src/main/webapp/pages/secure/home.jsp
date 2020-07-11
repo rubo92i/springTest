@@ -37,6 +37,7 @@
     <input type="submit" name="submit"><br>
 </form>
 
+<a href="/secure/comments">comments</a>
 <br><br>
 
 

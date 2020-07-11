@@ -1,9 +1,6 @@
 <%@ page import="am.basic.springTest.model.Comment" %>
-<%@ page import="am.basic.springTest.model.User" %>
-<%@ page import="static am.basic.springTest.util.constants.ParameterKeys.USER_ATTRIBUTE_KEY" %>
-<%@ page import="am.basic.springTest.service.CommentService" %>
 <%@ page import="java.util.List" %>
-<%@ page import="am.basic.springTest.service.impl.CommentServiceImpl" %>
+<%@ page import="static am.basic.springTest.util.constants.ParameterKeys.USER_ATTRIBUTE_KEY" %>
 <%--
   Created by IntelliJ IDEA.
   User: ruben.manukyan
@@ -18,11 +15,22 @@
 </head>
 <body>
 
+<a href="/logout" style="float: right">Logout</a>
+<a href="/secure/home">Home</a>
+
+
+<br>
+<form method="post" action="/secure/comments/add">
+    Comment : <input type="text" name="name">
+    Description : <input type="text" name="description">
+    <input type="submit" value="add">
+</form>
+<br>
+<br>
+
 
 <%
-    CommentService commentService = new CommentServiceImpl();
-    User user = (User) session.getAttribute(USER_ATTRIBUTE_KEY);
-    List<Comment> comments = commentService.getByUserId(user.getId());
+    List<Comment> comments = (List<Comment>) request.getAttribute("comments");
 %>
 
 <table border="solid 1px">
@@ -32,27 +40,22 @@
         for (Comment comment : comments) {
     %>
     <tr>
-        <td><%=comment.getName()%>
-        </td>
-        <td><%=comment.getDescription()%>
-        </td>
+
         <td>
-            <form method="post" action="/secure/delete-comment">
+            <form method="post" action="/secure/comments/edit">
                 <input type="hidden" name="id" value="<%=comment.getId()%>">
-                <input type="submit" value="DELETE">
+                <input type="text" name="name" value="<%=comment.getName()%>">
+                <input type="text" name="description" value="<%=comment.getDescription()%>">
+                <input type="submit" name="submit" value="DELETE">
+                <input type="submit" name="submit" value="UPDATE">
             </form>
         </td>
-    <%
+            <%
         }
     %>
 
 </table>
 
-<form method="post" action="/secure/add-comment">
-    Comment : <input type="text" name="name">
-    Description : <input type="text" name="description">
-    <input type="submit" value="add">
-</form>
 
 
 </body>

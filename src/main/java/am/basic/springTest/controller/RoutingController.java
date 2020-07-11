@@ -21,4 +21,10 @@ public class RoutingController {
     public String getForgetPasswordPage() {
         return FORGET_PASSWORD_PAGE;
     }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/secure/home")
+    public String getHomePage() {
+        return HOME_PAGE;
+    }
+
 }
