@@ -22,6 +22,7 @@ public class TestController {
     }
 
 
+
     @RequestMapping(method = RequestMethod.GET, path = "/test1")
     public ModelAndView test1() {
         return new ModelAndView("index");

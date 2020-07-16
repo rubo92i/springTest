@@ -11,4 +11,6 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
     List<Comment> getByUserId(int userId);
 
+    Comment getById(int id);
+
 }
