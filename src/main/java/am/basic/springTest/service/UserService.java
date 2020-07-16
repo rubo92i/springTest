@@ -1,14 +1,12 @@
 package am.basic.springTest.service;
 
 
-import am.basic.springTest.model.Comment;
 import am.basic.springTest.model.User;
 import am.basic.springTest.model.exceptions.AccessDeniedException;
 import am.basic.springTest.model.exceptions.DuplicateDataException;
 import am.basic.springTest.model.exceptions.NotFoundException;
 import am.basic.springTest.model.exceptions.UnverifiedException;
 
-import java.util.List;
 
 public interface UserService {
 

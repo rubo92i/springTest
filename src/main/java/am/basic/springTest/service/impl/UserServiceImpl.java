@@ -27,6 +27,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private MailSenderClient mailSenderClient;
 
+
+
     @Override
     @Transactional
     public void register(User user) throws DuplicateDataException {

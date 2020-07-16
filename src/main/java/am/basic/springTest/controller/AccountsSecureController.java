@@ -4,7 +4,9 @@ import am.basic.springTest.model.User;
 import am.basic.springTest.model.exceptions.AccessDeniedException;
 import am.basic.springTest.model.exceptions.NotFoundException;
 import am.basic.springTest.service.UserService;
+import am.basic.springTest.util.Container;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,7 +25,7 @@ public class AccountsSecureController {
 
     @Autowired
     private UserService userService;
-
+ 
 
     @RequestMapping(value = "/change-password", method = RequestMethod.POST)
     public ModelAndView changePassword(@RequestParam String password,

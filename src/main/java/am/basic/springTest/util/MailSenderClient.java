@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.annotation.PostConstruct;
 
 
 @Component
@@ -13,6 +16,8 @@ public class MailSenderClient {
 
     @Autowired
     public JavaMailSender emailSender;
+
+
 
     @Value("${spring.mail.username}")
     private String from;
