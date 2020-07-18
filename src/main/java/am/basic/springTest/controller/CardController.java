@@ -1,55 +1,76 @@
 package am.basic.springTest.controller;
 
 import am.basic.springTest.model.Card;
-import am.basic.springTest.repository.CardRepository;
+import am.basic.springTest.service.CardService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
+@Log4j2
 @RestController
 @RequestMapping("/cards")
 public class CardController {
 
 
+    //get tvyalner kardalu hamar
+    //post tvyalner grelu avelacnelu hamar
+    //put tvtyalner@ ttarmacnelu hamar
+    //delete jnjelu
+
 
     @Autowired
-    private CardRepository cardRepository;
+    private CardService cardService;
 
 
     @GetMapping
-    public ResponseEntity getAll(){
-        //return ResponseEntity.status(200).body(cardRepository.findAll());
-        return ResponseEntity.ok(cardRepository.findAll());
+    public ResponseEntity getAll() {
+        List<Card> cards = cardService.findAll();
+        return ResponseEntity.status(200).body(cards);
     }
 
     @PostMapping
-    public ResponseEntity add(@RequestBody Card card){
-        return ResponseEntity.ok(cardRepository.save(card));
+    public ResponseEntity add(@RequestBody Card card) {
+        cardService.add(card);
+        return ResponseEntity.ok(card);
     }
 
 
     @GetMapping("/by-number/{number}")
-    public ResponseEntity getByName(@PathVariable String number){
-        return ResponseEntity.ok(cardRepository.getByNumber(number));
+    public ResponseEntity getByName(@PathVariable String number) {
+        Card card = cardService.getByNumber(number);
+        return ResponseEntity.ok(card);
     }
 
 
     @GetMapping("/{id}")
-    public ResponseEntity getById(@PathVariable int id){
-        return ResponseEntity.ok(cardRepository.getById(id));
+    public ResponseEntity getById(@PathVariable int id) {
+        log.info("Received request for getting card by id : {}", id);
+        Optional<Card> optional = cardService.getById(id);
+        return ResponseEntity.of(optional);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable int id){
-        cardRepository.deleteById(id);
+    public ResponseEntity delete(@PathVariable int id) {
+        cardService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
-
     @PutMapping("/{id}")
-    public ResponseEntity update(@RequestBody Card card,@PathVariable int id){
+    public ResponseEntity update(@RequestBody Card card, @PathVariable int id) {
         card.setId(id);
-        return ResponseEntity.ok(cardRepository.save(card));
+        cardService.add(card);
+        return ResponseEntity.ok(card);
     }
 
 }
+
+
+//cardas/15/update
+//cards/15/delete
+//cards/15/get
+
+//  /cards  { post - add anum, put - update anum, delete - jnjuma, get - listna vereadarcnum}

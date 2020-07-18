@@ -9,6 +9,7 @@ import am.basic.springTest.service.UserService;
 import am.basic.springTest.util.CookieUtil;
 import am.basic.springTest.util.ValidationMessageConverter;
 import am.basic.springTest.util.encoder.Encryptor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,7 @@ import static am.basic.springTest.util.constants.Messages.*;
 import static am.basic.springTest.util.constants.Pages.*;
 import static am.basic.springTest.util.constants.ParameterKeys.*;
 
+@Log4j2
 @Controller
 public class AccountsController {
 
@@ -72,13 +74,16 @@ public class AccountsController {
             return new ModelAndView(HOME_PAGE);
 
         } catch (UnverifiedException e) {
+            log.info("Attempt to login for unauthorized user with username : {}",username);
             ModelAndView modelAndView = new ModelAndView(VERIFICATION_PAGE);
             modelAndView.addObject(MESSAGE_ATTRIBUTE_KEY, e.getMessage());
             modelAndView.addObject(USERNAME_PARAM_KEY, username);
             return modelAndView;
         } catch (NotFoundException e) {
+            log.info("Attempt to login with wrong credentials username : {}  and password : {}",username,password);
             return new ModelAndView(INDEX_PAGE, MESSAGE_ATTRIBUTE_KEY, e.getMessage());
         } catch (RuntimeException ex) {
+            log.error(ex.getMessage());
             ex.printStackTrace();
             return new ModelAndView(INDEX_PAGE, MESSAGE_ATTRIBUTE_KEY, INTERNAL_ERROR_MESSAGE);
         }

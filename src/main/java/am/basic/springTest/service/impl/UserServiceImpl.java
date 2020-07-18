@@ -11,6 +11,7 @@ import am.basic.springTest.service.UserService;
 import am.basic.springTest.util.MailSenderClient;
 import am.basic.springTest.util.encoder.Generator;
 import am.basic.springTest.util.encoder.Md5Encoder;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

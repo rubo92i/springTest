@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <RollingFile name="RollingFile">
+            <FileName>/var/logs/sprintTest.log</FileName>
+            <FilePattern>/var/logs/sprintTest/%d{yyyy-MM-dd}.log</FilePattern>
+            <PatternLayout>
+                <Pattern>%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/> // makes log file every day, because interval is 1 and FilePattern is yyyy-MM-dd.
+            </Policies>
+            <DefaultRolloverStrategy>
+                <Delete basePath="/var/logs/sprintTest/" maxDepth="2">
+                    <IfLastModified age="7d"/> //after 7 days deletes
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level = "INFO">
+            <AppenderRef ref="Console" level="INFO"/> <!--only for debug and local test-->
+            <AppenderRef ref="RollingFile" level="INFO"/> <!--use log to file on production environment-->
+        </Root>
+    </Loggers>
+</Configuration>
+
+
+<!--  TRACE  -> DEBUG -> INFO -> WARN -> ERROR  -->
