@@ -1,5 +1,10 @@
 package am.basic.springTest.model.exceptions;
 
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+
 public class DuplicateDataException extends Exception {
 
     public DuplicateDataException(String message) {

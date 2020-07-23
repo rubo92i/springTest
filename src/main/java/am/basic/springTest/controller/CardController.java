@@ -1,6 +1,7 @@
 package am.basic.springTest.controller;
 
 import am.basic.springTest.model.Card;
+import am.basic.springTest.model.exceptions.DuplicateDataException;
 import am.basic.springTest.service.CardService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class CardController {
     }
 
     @PostMapping
-    public ResponseEntity add(@RequestBody Card card) {
+    public ResponseEntity add(@RequestBody Card card) throws DuplicateDataException {
         cardService.add(card);
         return ResponseEntity.ok(card);
     }
@@ -60,9 +61,9 @@ public class CardController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity update(@RequestBody Card card, @PathVariable int id) {
+    public ResponseEntity update(@RequestBody Card card, @PathVariable int id) throws DuplicateDataException {
         card.setId(id);
-        cardService.add(card);
+        cardService.update(card);
         return ResponseEntity.ok(card);
     }
 

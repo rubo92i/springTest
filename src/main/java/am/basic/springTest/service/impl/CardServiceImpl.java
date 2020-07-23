@@ -1,6 +1,7 @@
 package am.basic.springTest.service.impl;
 
 import am.basic.springTest.model.Card;
+import am.basic.springTest.model.exceptions.DuplicateDataException;
 import am.basic.springTest.repository.CardRepository;
 import am.basic.springTest.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,8 @@ public class CardServiceImpl implements CardService {
 
 
     @Override
-    public void add(Card card) {
+    public void add(Card card) throws DuplicateDataException {
+        DuplicateDataException.check(cardRepository.existsByNumber(card.getNumber()),"duplicate.card.number");
         cardRepository.save(card);
     }
 
@@ -42,5 +44,11 @@ public class CardServiceImpl implements CardService {
     @Override
     public Card getByNumber(String number) {
         return cardRepository.getByNumber(number);
+    }
+
+    @Override
+    public void update(Card card) throws DuplicateDataException {
+        DuplicateDataException.check(cardRepository.existsByNumberAndIdNot(card.getNumber(),card.getId()),"duplicate.card");
+        cardRepository.save(card);
     }
 }
