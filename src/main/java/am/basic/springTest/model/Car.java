@@ -33,12 +33,12 @@ public class Car {
     private int year;
 
     @CreationTimestamp
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:svs.SSSXXX")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
 
-    // yyyy- year MM -amis dd-orna
+    // yyyy-tari MM-amis dd-or  HH-jam mm-rope ss-varkyan SSS-milivarkyan
     /*TemporalType.TIMESTAMP 1993-08-25 14:55:47*/
     /*TemporalType.DATE 1993-08-25 */
     /*TemporalType.TIME 14:55:47*/
