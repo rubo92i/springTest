@@ -7,9 +7,13 @@ public class AccessDeniedException extends Exception {
     }
 
 
+
     public static void check(boolean expresion, String message) throws AccessDeniedException {
         if (expresion) {
             throw new AccessDeniedException(message);
         }
     }
 }
+
+
+// int,long , heap - stack ,  String

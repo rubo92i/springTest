@@ -10,11 +10,11 @@ public interface CarService {
 
     List<Car> getAll();
 
-
     Optional<Car> findById(int id);
-
 
     Car save(Car car) throws DuplicateDataException;
 
     Car update(Car car) throws DuplicateDataException;
+
+
 }

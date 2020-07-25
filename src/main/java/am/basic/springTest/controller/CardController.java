@@ -5,9 +5,11 @@ import am.basic.springTest.model.exceptions.DuplicateDataException;
 import am.basic.springTest.service.CardService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,7 +57,11 @@ public class CardController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable int id) {
+    public ResponseEntity delete(@PathVariable int id, HttpServletRequest request) {
+        log.info("Delete request for Card");
+        if (log.isDebugEnabled()){
+            log.debug("Delete request for Card with id {} from ip {}",id,request.getRemoteAddr());
+        }
         cardService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

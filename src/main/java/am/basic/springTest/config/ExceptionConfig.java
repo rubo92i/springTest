@@ -18,12 +18,14 @@ public class ExceptionConfig {
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity handleNotFoundException(NotFoundException exception){
+        log.warn(exception.getMessage());
         return ResponseEntity.status(404).body(Collections.singletonMap("message",exception.getMessage()));
     }
 
 
     @ExceptionHandler(DuplicateDataException.class)
     public ResponseEntity handleDuplicateDataException(DuplicateDataException exception){
+        log.warn(exception.getMessage());
         return ResponseEntity.status(409).body(Collections.singletonMap("message",exception.getMessage()));
     }
 

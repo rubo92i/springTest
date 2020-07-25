@@ -21,8 +21,8 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <Root level = "INFO">
-            <AppenderRef ref="Console" level="INFO"/> <!--only for debug and local test-->
+        <Root level = "DEBUG">
+            <AppenderRef ref="Console" level="DEBUG"/> <!--only for debug and local test-->
             <AppenderRef ref="RollingFile" level="INFO"/> <!--use log to file on production environment-->
         </Root>
     </Loggers>

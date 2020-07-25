@@ -1,12 +1,12 @@
 package am.basic.springTest.model;
 
- import com.fasterxml.jackson.annotation.JsonFormat;
- import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
- import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
- import javax.json.bind.annotation.JsonbDateFormat;
- import javax.persistence.*;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -24,7 +24,7 @@ public class Car {
     private String model;
 
     @NotBlank
-    private String  vendor;
+    private String vendor;
 
     @NotBlank
     @Size(min = 5)
@@ -37,6 +37,10 @@ public class Car {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
 
     // yyyy-tari MM-amis dd-or  HH-jam mm-rope ss-varkyan SSS-milivarkyan
     /*TemporalType.TIMESTAMP 1993-08-25 14:55:47*/
