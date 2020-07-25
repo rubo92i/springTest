@@ -3,6 +3,8 @@ package am.basic.springTest.controller;
 import am.basic.springTest.model.Comment;
 import am.basic.springTest.model.User;
 import am.basic.springTest.service.CommentService;
+import am.basic.springTest.service.UserService;
+import am.basic.springTest.service.impl.UserServiceImpl;
 import am.basic.springTest.util.ValidationMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,7 @@ public class CommentController {
 
     @Autowired
     private CommentService commentService;
+
 
     @GetMapping("/comments")
     public ModelAndView getCommentPage(@SessionAttribute("user") User user) {
